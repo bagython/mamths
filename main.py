@@ -11,7 +11,7 @@ def fof(x):
     return x**2
 
 
-def rootfinder(
+def bisection(
     function: Callable[[float], float], interval: tuple[float, float], error: float
 ) -> float:
     a, b = interval
@@ -45,24 +45,54 @@ def bisection_worst_case_steps(interval: tuple[float, float], epsilon: float) ->
     return ceil(log2((b - a) / epsilon))
 
 
+def fixedpoint(
+    function: Callable[[float], float],
+    interval: tuple[float, float],
+    alpha: float,  # kinda wack to pass it in
+    error: float,
+) -> float:
+    f = function
+    a, b = interval
+    if not alpha:
+        pass  # pick an alpha
+    x = (a + b) / 2
+
+    def _g(x: float) -> float:
+        return alpha * f(x) + x  # hmm
+
+    while abs(x - (x := _g(x))) >= error:  # :P
+        print(x)
+
+    return x
+
+
 def main():
-    epsilon = 0.0000000000001
-    print(rootfinder(forg, (0, 5), epsilon))
-    # print(rootfinder(fof, (-1, 1), epsilon))  # nuh uh
+    # epsilon = 0.0000000000001
+    # print(bisection(forg, (0, 5), epsilon))
+    # # print(bisection(fof, (-1, 1), epsilon))  # nuh uh
 
-    print("homework: ")
-    eps = 0.01
-    interval = (1, 5)
+    # print("homework: ")
+    # eps = 0.01
+    # interval = (1, 5)
 
+    # def f(x):
+    #     return (x**2) - 4
+
+    # print(getsource(f))  # :D
+    # print(
+    #     f"expected worst case iterations: {bisection_worst_case_steps(interval, eps)}"
+    # )
+    # print("iteration | root approximation | f(c) value")
+    # print("root:", bisection(f, interval, eps))
     def f(x):
-        return (x**2) - 4
+        return (x**3) - 27
 
-    print(getsource(f))  # :D
-    print(
-        f"expected worst case iterations: {bisection_worst_case_steps(interval, eps)}"
-    )
-    print("iteration | root approximation | f(c) value")
-    print("root:", rootfinder(f, interval, eps))
+    interval = (1, 4)
+    alpha = -0.02
+    eps = 0.00001
+    print("root-ish: ", fixedpoint(f, interval, alpha, eps))
+    alpha = -0.04
+    print("root-ish: ", fixedpoint(f, interval, alpha, eps))
 
 
 if __name__ == "__main__":
