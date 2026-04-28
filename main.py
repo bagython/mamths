@@ -50,12 +50,16 @@ def fixedpoint(
     interval: tuple[float, float],
     alpha: float,  # kinda wack to pass it in
     error: float,
+    initial_approx: float | None = None,
 ) -> float:
     f = function
     a, b = interval
     if not alpha:
         pass  # pick an alpha
-    x = (a + b) / 2
+    if not initial_approx:
+        x = (a + b) / 2
+    else:
+        x = initial_approx
 
     def _g(x: float) -> float:
         return alpha * f(x) + x  # hmm
@@ -90,9 +94,9 @@ def main():
     interval = (1, 4)
     alpha = -0.02
     eps = 0.00001
-    print("root-ish: ", fixedpoint(f, interval, alpha, eps))
+    print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
     alpha = -0.04
-    print("root-ish: ", fixedpoint(f, interval, alpha, eps))
+    print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
 
 
 if __name__ == "__main__":
