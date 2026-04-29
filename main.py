@@ -1,4 +1,4 @@
-from inspect import getsource
+# from inspect import getsource
 from math import ceil, log2
 from typing import Callable
 
@@ -70,6 +70,29 @@ def fixedpoint(
     return x
 
 
+def newtons(
+    function: Callable[[float], float],
+    fprime: Callable[[float], float],
+    interval: tuple[float, float],
+    error: float,
+    initial_approx: float | None = None,
+) -> float:
+    f = function
+    a, b = interval
+    if not initial_approx:
+        x = (a + b) / 2
+    else:
+        x = initial_approx
+
+    def _g(x: float) -> float:
+        return x - (f(x) / fprime(x))
+
+    while abs(x - (x := _g(x))) >= error:  # :P
+        print(x)
+
+    return x
+
+
 def main():
     # epsilon = 0.0000000000001
     # print(bisection(forg, (0, 5), epsilon))
@@ -91,12 +114,18 @@ def main():
     def f(x):
         return (x**3) - 27
 
+    def f_prime(x):
+        return 3 * (x**2)
+
     interval = (1, 4)
-    alpha = -0.02
-    eps = 0.00001
-    print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
-    alpha = -0.04
-    print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
+    # alpha = -0.02
+    eps = 0.00000001
+    # print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
+    # alpha = -0.04
+    # print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
+
+    print(f"root-ish: {newtons(f, f_prime, interval, eps)}")
+    print(f"root-ish: {newtons(f, f_prime, interval, eps, initial_approx=1)}")
 
 
 if __name__ == "__main__":
