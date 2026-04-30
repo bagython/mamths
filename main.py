@@ -119,13 +119,16 @@ def main():
 
     interval = (1, 4)
     # alpha = -0.02
-    eps = 0.00000001
+    eps = 0.000000001
     # print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
     # alpha = -0.04
     # print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
 
-    print(f"root-ish: {newtons(f, f_prime, interval, eps)}")
-    print(f"root-ish: {newtons(f, f_prime, interval, eps, initial_approx=1)}")
+    print(f"newt: {newtons(f, f_prime, interval, eps)}")
+    print(f"newt: {newtons(f, f_prime, interval, eps, initial_approx=1)}")
+    alpha = -0.04
+    print(f"alpha: {alpha} fixed: {fixedpoint(f, interval, alpha, eps)}")
+    print(bisection(forg, (0, 5), eps))
 
 
 if __name__ == "__main__":
