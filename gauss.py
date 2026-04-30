@@ -8,7 +8,7 @@ def solvelinear(A: Matrix, b: Matrix):
 
 def main():
     A = Matrix(((1, 1, 1), (1, 2, -1), (1, -1, 3)))
-    b = ((3), (2), (3))
+    b = Matrix(((3,), (2,), (3,)))
 
     x = solvelinear(A, b)
 

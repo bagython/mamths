@@ -85,8 +85,8 @@ class Matrix:
 
                 abds2 = [[0.0] * other.columns for _ in range(self.rows)]
 
-                for i in range(k):
-                    for j in range(k):
+                for i in range(self.rows):
+                    for j in range(other.columns):
                         abds2[i][j] = sum(
                             self[i, index] * other[index, j] for index in range(k)
                         )
