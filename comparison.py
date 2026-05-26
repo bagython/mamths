@@ -19,16 +19,17 @@ def sign_change_brackets(f, a, b, n):
 
 
 def main():
+    # f(x) = (x-1)(x+2)(x-3) = x^3 - 2x^2 - 5x + 6  -- roots at -2, 1, 3
     def F(x):
-        return x**2 - 4
+        return x**3 - 2 * x**2 - 5 * x + 6
 
     def DF(x):
-        return 2 * x
+        return 3 * x**2 - 4 * x - 5
 
-    A = -5.0
+    A = -4.0
     B = 5.0
     EPS = 1e-12
-    ALPHA = -0.1  # step size for fixed-point iteration (g = alpha*f + x)
+    ALPHA = -0.05  # step size for fixed-point iteration (g = alpha*f + x)
     N_SUBDIVISIONS = 37  # for locating sign-change brackets
 
     brackets = sign_change_brackets(F, A, B, N_SUBDIVISIONS)
