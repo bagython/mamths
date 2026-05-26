@@ -37,6 +37,20 @@ b = (
 x = [0.0 for i in range(len(b))]
 eps = 1e-6
 
+n = len(b)
+while True:
+    x_new = [0.0 for _ in range(n)]
+    for i in range(n):
+        sigma = 0.0
+        for j in range(n):
+            if j != i:
+                sigma += A[i][j] * x[j]
+        x_new[i] = (b[i] - sigma) / A[i][i]
+    if max(abs(x_new[i] - x[i]) for i in range(n)) < eps:
+        x = x_new
+        break
+    x = x_new
+print(x)
 
 # Input: initial guess x(0) to the solution, (diagonal dominant) matrix A, right-hand side vector b, convergence criterion
 # Output: solution when convergence is reached
@@ -55,7 +69,6 @@ eps = 1e-6
 #     end
 #     increment k
 # end
-
 
 # Plot History of values
 plt.plot(x, label="x")
