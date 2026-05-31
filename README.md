@@ -116,4 +116,24 @@ large graph (15 nodes):
 
 # SLE algorithms testing suite
 
+[SLEsuite.py](SLEsuite.py), [gauss.py](gauss.py), [jacobi.py](jacobi.py), [seidel.py](seidel.py)
+
+```
+Running: Random matrix, no diagonal dominance, entries in [-5, 5]
+  -> experiment_random.png
+Running: Hilbert matrix
+  -> experiment_hilbert.png
+Running: Random matrix with diagonal dominance
+  -> experiment_diagdominant.png
+Wrote results.csv (288 rows)
+```
+
+[results.csv](results.csv)
+
+![random](experiment_random.png)
+
+![hilbert](experiment_hilbert.png)
+
+![diagdominant](experiment_diagdominant.png)
+
 # LinReg with Gradient Descent
