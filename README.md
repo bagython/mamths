@@ -34,6 +34,38 @@ fixed point much faster: interval=(1, 6) x0=4.5 alpha=-0.03704
 
 # Root finding algorithms experiments
 
+[comparison.py](comparison.py), [bisection.py](bisection.py), [fixed_point.py](fixed_point.py), [newton.py](newton.py)
+
+```
+f(x) = x^2 - 4: 2 bracket(s) in [-3.0, 3.5]  (alpha=-0.1)
+  bracket [-2.1522, -1.8696]:
+    bisection  : root=-2.0000000000  iters=40
+    newton     : root=-2.0000000000  iters=4
+    fixed-point: diverged
+  bracket [1.8043, 2.0870]:
+    bisection  : root=2.0000000000  iters=40
+    newton     : root=2.0000000000  iters=4
+    fixed-point: root=2.0000000000  iters=48
+
+f(x) = cos(x) - x: 1 bracket(s) in [0.0, 1.5]  (alpha=1.0)
+  bracket [0.7143, 0.7857]:
+    bisection  : root=0.7390851332  iters=38
+    newton     : root=0.7390851332  iters=4
+    fixed-point: root=0.7390851332  iters=61
+
+f(x) = (x - 1)^3: 1 bracket(s) in [-2.0, 2.7]  (alpha=-0.2)
+  bracket [0.8609, 1.0652]:
+    bisection  : root=1.0000000000  iters=39
+    newton     : root=1.0000000000  iters=59
+    fixed-point: diverged
+```
+
+![quadratic](convergence_quadratic.png)
+
+![trig](convergence_trig.png)
+
+![cubic](convergence_cubic.png)
+
 # Sparse matrix solver
 
 # PageRank experiments
