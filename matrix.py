@@ -119,6 +119,7 @@ class Matrix:
     def determinant(self):
         pass
 
+    # it was slop anyhow
     def inverse(self) -> "Matrix":
         """Returns the inverse of the matrix using Gauss-Jordan elimination."""
         if self.rows != self.columns:
@@ -152,8 +153,7 @@ class Matrix:
                 if i != j:
                     factor = augmented[j][i]
                     augmented[j] = [
-                        augmented[j][k] - factor * augmented[i][k]
-                        for k in range(2 * n)
+                        augmented[j][k] - factor * augmented[i][k] for k in range(2 * n)
                     ]
 
         # Extract the right half
