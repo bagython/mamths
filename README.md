@@ -82,6 +82,38 @@ f(x) = (x - 1)^3: 1 bracket(s) in [-2.0, 2.7]  (alpha=-0.2)
 
 # PageRank experiments
 
+[pagerank.py](pagerank.py)
+
+```
+small graph (5 nodes):
+  Page 0: 0.3593
+  Page 1: 0.0995
+  Page 2: 0.0818
+  Page 3: 0.1827
+  Page 4: 0.2767
+
+large graph (15 nodes):
+  Page 0: 0.0893
+  Page 1: 0.0832
+  Page 2: 0.0250
+  Page 3: 0.0100
+  Page 4: 0.1399
+  Page 5: 0.0720
+  Page 6: 0.0353
+  Page 7: 0.0456
+  Page 8: 0.1256
+  Page 9: 0.0100
+  Page 10: 0.0353
+  Page 11: 0.0952
+  Page 12: 0.1751
+  Page 13: 0.0100
+  Page 14: 0.0485
+```
+
+![small](pagerank_small.png)
+
+![large](pagerank_large.png)
+
 # SLE algorithms testing suite
 
 # LinReg with Gradient Descent
