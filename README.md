@@ -68,6 +68,18 @@ f(x) = (x - 1)^3: 1 bracket(s) in [-2.0, 2.7]  (alpha=-0.2)
 
 # Sparse matrix solver
 
+[seidel.py](seidel.py)
+
+```
+       n  off/row        nnz  iters    max_err
+    1000        3       3995     20   2.54e-12
+    1000        8       8966     19   2.23e-12
+   10000        3      39992     22   3.64e-12
+   10000        8      89964     20   5.46e-12
+  100000        3     399995     23   4.37e-11
+  100000        8     899951     21   5.82e-11
+```
+
 # PageRank experiments
 
 # SLE algorithms testing suite
