@@ -137,3 +137,15 @@ Wrote results.csv (288 rows)
 ![diagdominant](experiment_diagdominant.png)
 
 # LinReg with Gradient Descent
+
+[linreg_gd.py](linreg_gd.py)
+
+```
+fit: w=2.4382 b=-3.6333  (true w=2.5 b=-4.0)
+final MSE: 2.8219
+wrote linreg_fit.gif and linreg_alphas.png
+```
+
+![fit](linreg_fit.gif)
+
+![alphas](linreg_alphas.png)
