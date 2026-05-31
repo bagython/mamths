@@ -1,7 +1,9 @@
 import random
 
 
-def generate_sparse_matrix(n, off_diagonals_per_row=5, seed=0):
+def generate_sparse_matrix(
+    n: int, off_diagonals_per_row=5, seed=0
+) -> list[dict[int, float]]:
     rng = random.Random(seed)
     matrix = []
     for i in range(n):
@@ -19,7 +21,7 @@ def generate_sparse_matrix(n, off_diagonals_per_row=5, seed=0):
     return matrix
 
 
-def matvec(matrix, x):
+def matvec(matrix: list[dict[int, float]], x: list[float]):
     result = [0.0] * len(matrix)
     for i, row in enumerate(matrix):
         s = 0.0
@@ -29,9 +31,13 @@ def matvec(matrix, x):
     return result
 
 
-def gauss_seidel(matrix, b, max_iters=1000, tol=1e-8):
+def gauss_seidel(
+    matrix: list[dict[int, float]], b: list[float], max_iters=1000, tol=1e-8
+):
     n = len(matrix)
     x = [0.0] * n
+
+    max_diff = 0.0
 
     for it in range(1, max_iters + 1):
         max_diff = 0.0
