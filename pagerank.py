@@ -74,7 +74,7 @@ def compute_pagerank_power_method(
     return x
 
 
-def plot_pagerank_graph(G: nx.DiGraph, scores: np.ndarray) -> None:
+def plot_pagerank_graph(G: nx.DiGraph, scores: np.ndarray, path: str) -> None:
     """Plots the web graph where node sizes are proportional to their PageRank.
 
     Includes a baseline minimum size so lower-ranked nodes remain visible.
@@ -104,23 +104,22 @@ def plot_pagerank_graph(G: nx.DiGraph, scores: np.ndarray) -> None:
 
     plt.title("PageRank Visualization (Node Size Proportional to Rank)", fontsize=14)
     plt.axis("off")
-    plt.show()
+    plt.savefig(path, dpi=120)
+    plt.close()
 
 
 def main():
-    n_pages = 12
-    web_graph = generate_random_web_graph(n_pages)
+    # small graph then bigger one
+    for label, n_pages in (("small", 5), ("large", 15)):
+        web_graph = generate_random_web_graph(n_pages)
+        pagerank_matrix = build_pagerank_matrix(web_graph, alpha=0.85)
+        ranks = compute_pagerank_power_method(pagerank_matrix)
 
-    pagerank_matrix = build_pagerank_matrix(web_graph, alpha=0.85)
+        print(f"\n{label} graph ({n_pages} nodes):")
+        for node, rank in enumerate(ranks):
+            print(f"  Page {node}: {rank:.4f}")
 
-    ranks = compute_pagerank_power_method(pagerank_matrix)
-
-    print("Computed Ranks:")
-    for node, rank in enumerate(ranks):
-        print(f"Page {node}: {rank:.4f}")
-
-    # 4) Plot the graph with proportional node sizes
-    plot_pagerank_graph(web_graph, ranks)
+        plot_pagerank_graph(web_graph, ranks, f"pagerank_{label}.png")
 
 
 if __name__ == "__main__":
