@@ -61,25 +61,18 @@ def gauss_seidel(
 
 
 def main():
-    n = 100_000
-    print(f"Generating random sparse {n} x {n} matrix...")
-    matrix = generate_sparse_matrix(n, off_diagonals_per_row=5, seed=42)
-    nnz = sum(len(row) for row in matrix)
-    print(f"  non-zero entries: {nnz} (~{nnz / n:.1f} per row)")
-
-    x_true = [float(i + 1) for i in range(n)]  # known solution 1..n
-    b = matvec(matrix, x_true)
-
-    print("Solving with Gauss-Seidel...")
-    x, iters, last_diff = gauss_seidel(matrix, b, max_iters=1000, tol=1e-10)
-
-    max_err = max(abs(x[i] - x_true[i]) for i in range(n))
-    print(f"  iterations:        {iters}")
-    print(f"  last update diff:  {last_diff:.2e}")
-    print(f"  max |x - x_true|:  {max_err:.2e}")
-
-    assert max_err < 1e-5, f"solution did not match: max error {max_err}"
-    print("PASS: Gauss-Seidel recovered the known solution.")
+    # play with different sizes and sparsity; for each the known solution is
+    # 1..n and b is built from it, so we can report the recovered max error.
+    print(f"{'n':>8} {'off/row':>8} {'nnz':>10} {'iters':>6} {'max_err':>10}")
+    for n in (1_000, 10_000, 100_000):
+        for off in (3, 8):
+            matrix = generate_sparse_matrix(n, off_diagonals_per_row=off, seed=42)
+            nnz = sum(len(row) for row in matrix)
+            x_true = [float(i + 1) for i in range(n)]  # known solution 1..n
+            b = matvec(matrix, x_true)
+            x, iters, _ = gauss_seidel(matrix, b, max_iters=1000, tol=1e-10)
+            max_err = max(abs(x[i] - x_true[i]) for i in range(n))
+            print(f"{n:>8} {off:>8} {nnz:>10} {iters:>6} {max_err:>10.2e}")
 
 
 if __name__ == "__main__":
