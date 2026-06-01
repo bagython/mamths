@@ -118,11 +118,11 @@ def main():
         return 3 * (x**2)
 
     interval = (1, 4)
-    # alpha = -0.02
+    alpha = -0.02
     eps = 0.000000001
-    # print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
-    # alpha = -0.04
-    # print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
+    print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
+    alpha = -0.04
+    print(f"alpha: {alpha} root-ish: {fixedpoint(f, interval, alpha, eps)}")
 
     print(f"newt: {newtons(f, f_prime, interval, eps)}")
     print(f"newt: {newtons(f, f_prime, interval, eps, initial_approx=1)}")
